@@ -1,0 +1,302 @@
+<title>কক ঘর</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@500;700;800&family=Hind+Siliguri:wght@400;500;600&display=swap">
+<style>
+/* Layout: সরু বাম-সারিবদ্ধ হিরো, তার নিচে স্পিড গাইড, পণ্যের গ্রিড, শেষে অর্ডার ফর্ম। রঙ কোর্টের মেঝের সবুজ আর শাটলের ডগার কমলা। */
+:root {
+  --bg: #f2f6f3;
+  --surface: #ffffff;
+  --fg: #11261e;
+  --muted: #55675e;
+  --line: #d3ddd7;
+  --court: #0d6a4d;
+  --court-ink: #ffffff;
+  --tip: #e4560e;
+  --tip-ink: #ffffff;
+  --soft: #e1ede6;
+  --font-display: "Anek Bangla", "Noto Sans Bengali", "Hind Siliguri", sans-serif;
+  --font-body: "Hind Siliguri", "Noto Sans Bengali", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b1612; --surface: #12231c; --fg: #e8f1ec; --muted: #9db3a8; --line: #24392f;
+    --court: #3fcf9b; --court-ink: #06130e; --tip: #ff7a3d; --tip-ink: #1a0a02; --soft: #173026;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b1612; --surface: #12231c; --fg: #e8f1ec; --muted: #9db3a8; --line: #24392f;
+  --court: #3fcf9b; --court-ink: #06130e; --tip: #ff7a3d; --tip-ink: #1a0a02; --soft: #173026;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.7;
+  padding-block: 0 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1040px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.25; margin: 0; text-wrap: balance; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--tip); outline-offset: 2px; }
+
+.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-block: 16px; border-bottom: 1px solid var(--line); }
+.brand { font-family: var(--font-display); font-weight: 800; font-size: 22px; letter-spacing: .01em; }
+.top a.call { font-weight: 600; font-size: 15px; text-decoration: none; padding: 8px 14px; border: 1.5px solid var(--court); border-radius: 6px; color: var(--court); }
+
+.hero { display: grid; grid-template-columns: 1.3fr 1fr; gap: 24px; align-items: center; padding-block: 40px 32px; }
+.hero > * { min-width: 0; }
+.kicker { font-size: 13px; font-weight: 600; letter-spacing: .08em; color: var(--tip); margin: 0 0 10px; }
+.hero h1 { font-size: clamp(32px, 6vw, 54px); font-weight: 800; }
+.hero p.lead { color: var(--muted); font-size: 18px; max-width: 34em; margin: 16px 0 24px; }
+.btns { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { font-family: var(--font-body); font-weight: 600; font-size: 16px; border: 0; border-radius: 6px; padding: 12px 20px; cursor: pointer; text-decoration: none; display: inline-block; }
+.btn.primary { background: var(--tip); color: var(--tip-ink); }
+.btn.ghost { background: transparent; color: var(--fg); border: 1.5px solid var(--line); }
+.hero svg { width: 100%; max-width: 340px; height: auto; justify-self: center; }
+
+.facts { display: flex; flex-wrap: wrap; gap: 8px 24px; padding-block: 16px; border-block: 1px solid var(--line); font-size: 15px; color: var(--muted); }
+.facts b { color: var(--fg); font-weight: 600; }
+
+section { padding-block: 40px 8px; }
+section > h2 { font-size: clamp(24px, 4vw, 32px); margin-bottom: 8px; }
+section > p.sub { color: var(--muted); margin: 0 0 24px; max-width: 40em; }
+
+.speed { background: var(--soft); border-radius: 10px; padding: 20px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.speed div { min-width: 0; }
+.speed .n { font-family: var(--font-display); font-weight: 800; font-size: 32px; color: var(--court); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.speed .t { font-weight: 600; }
+.speed .d { color: var(--muted); font-size: 14px; }
+.speed-note { margin: 14px 0 0; color: var(--muted); font-size: 15px; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.card h3 { font-size: 19px; font-weight: 700; }
+.tag { align-self: flex-start; font-size: 12px; font-weight: 600; letter-spacing: .04em; padding: 2px 10px; border-radius: 99px; background: var(--soft); color: var(--court); }
+.card p { margin: 0; color: var(--muted); font-size: 15px; flex: 1; }
+.price { font-family: var(--font-display); font-weight: 800; font-size: 26px; font-variant-numeric: tabular-nums; }
+.price small { font-family: var(--font-body); font-weight: 400; font-size: 13px; color: var(--muted); }
+.row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.qty { display: inline-flex; align-items: center; border: 1.5px solid var(--line); border-radius: 6px; overflow: hidden; }
+.qty button { width: 36px; height: 38px; border: 0; background: transparent; color: var(--fg); font-size: 20px; cursor: pointer; }
+.qty button:hover { background: var(--soft); }
+.qty span { min-width: 34px; text-align: center; font-weight: 600; font-variant-numeric: tabular-nums; }
+.card.on { border-color: var(--court); box-shadow: 0 0 0 1px var(--court); }
+
+.order { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 22px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.order > * { min-width: 0; }
+form { display: grid; gap: 12px; }
+label { font-weight: 600; font-size: 14px; display: grid; gap: 4px; }
+input, textarea { font: inherit; color: var(--fg); background: var(--bg); border: 1.5px solid var(--line); border-radius: 6px; padding: 10px 12px; width: 100%; }
+textarea { min-height: 76px; resize: vertical; }
+.sum h3 { font-size: 18px; margin-bottom: 10px; }
+.sum ul { list-style: none; margin: 0 0 12px; padding: 0; }
+.sum li { display: flex; justify-content: space-between; gap: 12px; padding-block: 6px; border-bottom: 1px dashed var(--line); font-size: 15px; }
+.sum li span:last-child { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.sum .empty { color: var(--muted); font-size: 15px; padding-block: 8px; }
+.total { display: flex; justify-content: space-between; font-family: var(--font-display); font-weight: 800; font-size: 22px; margin-bottom: 14px; }
+.msg { display: none; margin-top: 16px; background: var(--soft); border-radius: 8px; padding: 14px; font-size: 15px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.msg.show { display: block; }
+.num { font-weight: 600; font-variant-numeric: tabular-nums; user-select: all; }
+.hint { font-size: 14px; color: var(--muted); margin: 8px 0 0; }
+
+footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 15px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+
+@media (max-width: 720px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero svg { max-width: 220px; justify-self: start; order: -1; }
+  .speed { grid-template-columns: repeat(2, 1fr); }
+  .order { grid-template-columns: 1fr; padding: 16px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">কক ঘর</div>
+    <a class="call" href="#order">অর্ডার করুন</a>
+  </header>
+
+  <div class="hero">
+    <div>
+      <p class="kicker">ব্যাডমিন্টন শাটলকক · হোলসেল ও খুচরা</p>
+      <h1>খেলার জন্য ভালো কক, ঠিক দামে।</h1>
+      <p class="lead">ক্লাবের ম্যাচ, অফিসের কোর্ট বা বিকেলের আড্ডা, সব খেলার জন্য ফেদার ও নাইলন কক পাবেন এখানে। টিউব ধরে কিনলে দাম কম।</p>
+      <div class="btns">
+        <a class="btn primary" href="#products">কক দেখুন</a>
+        <a class="btn ghost" href="#speed">কোন স্পিড কিনবেন?</a>
+      </div>
+    </div>
+    <svg viewBox="0 0 200 260" role="img" aria-label="শাটলকক">
+      <g fill="none" stroke="var(--fg)" stroke-width="2.5" stroke-linecap="round">
+        <path d="M70 108 L36 18 M82 108 L64 10 M96 108 L90 6 M110 108 L112 6 M124 108 L138 10 M136 108 L160 18" opacity=".55"/>
+        <path d="M40 40 Q100 62 156 40 M52 74 Q100 92 144 74" opacity=".55"/>
+      </g>
+      <path d="M62 112 Q100 96 144 112 L128 120 L78 120 Z" fill="var(--soft)" stroke="var(--fg)" stroke-width="2.5"/>
+      <path d="M74 120 Q74 168 100 190 Q126 168 130 120 Z" fill="var(--tip)" stroke="var(--fg)" stroke-width="2.5"/>
+      <path d="M86 140 Q100 150 118 140" fill="none" stroke="var(--tip-ink)" stroke-width="2" opacity=".6"/>
+    </svg>
+  </div>
+
+  <div class="facts">
+    <span><b>১ টিউব</b> = ১২টি কক</span>
+    <span><b>ঢাকায়</b> হোম ডেলিভারি</span>
+    <span><b>ক্যাশ অন ডেলিভারি</b> সুবিধা</span>
+  </div>
+
+  <section id="speed">
+    <h2>কোন স্পিডের কক নেবেন?</h2>
+    <p class="sub">কক ধীর হলে সংখ্যা কম, দ্রুত হলে বেশি। আবহাওয়া গরম হলে কক বেশি দূরে যায়, তাই ধীর স্পিড বেছে নিন।</p>
+    <div class="speed">
+      <div><div class="n">৭৫</div><div class="t">ধীর</div><div class="d">খুব গরমে, ছোট কোর্টে</div></div>
+      <div><div class="n">৭৬</div><div class="t">মাঝারি-ধীর</div><div class="d">গরম আর গুমোট দিনে</div></div>
+      <div><div class="n">৭৭</div><div class="t">মাঝারি</div><div class="d">সাধারণ আবহাওয়ায়</div></div>
+      <div><div class="n">৭৮</div><div class="t">দ্রুত</div><div class="d">শীতে, খোলা হলে</div></div>
+    </div>
+    <p class="speed-note">বাংলাদেশে বছরের বেশিরভাগ সময় ৭৬ বা ৭৭ চলে। কোনটা নেবেন বুঝতে না পারলে অর্ডারের সময় লিখে দিন, আমরা বলে দেব।</p>
+  </section>
+
+  <section id="products">
+    <h2>আমাদের কক</h2>
+    <p class="sub">সংখ্যা বাড়িয়ে নিচে অর্ডার ফর্মে যান। দাম টাকায়।</p>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section id="order">
+    <h2>অর্ডার করুন</h2>
+    <p class="sub">ফর্ম পূরণ করলে অর্ডারের মেসেজ তৈরি হবে। সেটা WhatsApp-এ পাঠিয়ে দিন, আমরা কনফার্ম করব।</p>
+    <div class="order">
+      <form id="form">
+        <label for="name">আপনার নাম<input id="name" autocomplete="name" placeholder="যেমন: রাকিব হাসান"></label>
+        <label for="phone">মোবাইল নম্বর<input id="phone" inputmode="tel" autocomplete="tel" placeholder="01XXXXXXXXX"></label>
+        <label for="addr">ডেলিভারির ঠিকানা<textarea id="addr" placeholder="এলাকা, রোড, বাসা নম্বর"></textarea></label>
+        <label for="speedpick">কোন স্পিড লাগবে (ঐচ্ছিক)<input id="speedpick" placeholder="৭৬ / ৭৭ / জানি না"></label>
+        <button class="btn primary" type="submit">অর্ডারের মেসেজ তৈরি করুন</button>
+      </form>
+      <div class="sum">
+        <h3>আপনার অর্ডার</h3>
+        <ul id="lines"></ul>
+        <div class="total"><span>মোট</span><span id="total">৳০</span></div>
+        <div class="hint">ডেলিভারি চার্জ আলাদা। অর্ডার কনফার্মের সময় জানানো হবে।</div>
+      </div>
+    </div>
+    <div class="msg" id="msg"></div>
+    <div class="btns" id="after" style="margin-top:14px" hidden>
+      <button class="btn ghost" id="copy" type="button">মেসেজ কপি করুন</button>
+      <a class="btn primary" id="wa" href="#" target="_blank" rel="noopener">WhatsApp-এ পাঠান</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>যোগাযোগ: <span class="num" id="phoneShow"></span> <button class="btn ghost" id="copyPhone" type="button" style="padding:4px 10px;font-size:13px">কপি</button></span>
+    <span>প্রতিদিন সকাল ১০টা থেকে রাত ১০টা</span>
+  </footer>
+</div>
+
+<script>
+// এখানে নিজের তথ্য বসান: ফোন নম্বর (WhatsApp-এর জন্য দেশের কোডসহ), দোকানের নাম, পণ্য ও দাম।
+var PHONE_LOCAL = "01XXXXXXXXX";
+var PHONE_INTL = "8801XXXXXXXXX";
+var SHOP = "কক ঘর";
+var PRODUCTS = [
+  { id: "duck", name: "ডাক ফেদার কক", tag: "টিউব · ১২টি", desc: "ক্লাব ও নিয়মিত খেলার জন্য। টেকে ভালো, দামে সাশ্রয়ী।", price: 1800, unit: "টিউব" },
+  { id: "goose", name: "প্রিমিয়াম গুজ ফেদার", tag: "টিউব · ১২টি", desc: "টুর্নামেন্ট মানের কক। ওড়ে স্থির, কর্কের টান ভালো।", price: 2800, unit: "টিউব" },
+  { id: "nylon", name: "নাইলন প্র্যাকটিস কক", tag: "টিউব · ১২টি", desc: "রোজকার অনুশীলন আর বাচ্চাদের খেলার জন্য। সহজে ভাঙে না।", price: 900, unit: "টিউব" },
+  { id: "single", name: "খুচরা কক", tag: "১ পিস", desc: "পুরো টিউব লাগবে না? একটা-দুটো করেও নিতে পারেন।", price: 160, unit: "পিস" }
+];
+var qty = {};
+PRODUCTS.forEach(function (p) { qty[p.id] = 0; });
+var bn = function (n) { return Number(n).toLocaleString("bn-BD"); };
+
+document.getElementById("phoneShow").textContent = PHONE_LOCAL;
+
+var grid = document.getElementById("grid");
+PRODUCTS.forEach(function (p) {
+  var c = document.createElement("div");
+  c.className = "card"; c.id = "card-" + p.id;
+  c.innerHTML =
+    '<span class="tag">' + p.tag + '</span><h3>' + p.name + '</h3><p>' + p.desc + '</p>' +
+    '<div class="price">৳' + bn(p.price) + ' <small>/ ' + p.unit + '</small></div>' +
+    '<div class="row"><div class="qty">' +
+    '<button type="button" data-id="' + p.id + '" data-d="-1" aria-label="কমান">−</button>' +
+    '<span id="q-' + p.id + '">০</span>' +
+    '<button type="button" data-id="' + p.id + '" data-d="1" aria-label="বাড়ান">+</button></div></div>';
+  grid.appendChild(c);
+});
+grid.addEventListener("click", function (e) {
+  var b = e.target.closest("button[data-id]");
+  if (!b) return;
+  var id = b.getAttribute("data-id"), d = Number(b.getAttribute("data-d"));
+  qty[id] = Math.max(0, Math.min(99, qty[id] + d));
+  render();
+});
+
+function render() {
+  var lines = document.getElementById("lines"), total = 0, html = "";
+  PRODUCTS.forEach(function (p) {
+    var q = qty[p.id];
+    document.getElementById("q-" + p.id).textContent = bn(q);
+    document.getElementById("card-" + p.id).classList.toggle("on", q > 0);
+    if (q > 0) {
+      total += q * p.price;
+      html += "<li><span>" + p.name + " × " + bn(q) + " " + p.unit + "</span><span>৳" + bn(q * p.price) + "</span></li>";
+    }
+  });
+  lines.innerHTML = html || '<li class="empty" style="border:0">এখনো কিছু বাছাই করা হয়নি।</li>';
+  document.getElementById("total").textContent = "৳" + bn(total);
+  return total;
+}
+
+function buildMessage() {
+  var name = document.getElementById("name").value.trim();
+  var phone = document.getElementById("phone").value.trim();
+  var addr = document.getElementById("addr").value.trim();
+  var sp = document.getElementById("speedpick").value.trim();
+  var items = PRODUCTS.filter(function (p) { return qty[p.id] > 0; }).map(function (p) {
+    return "• " + p.name + " × " + bn(qty[p.id]) + " " + p.unit + " = ৳" + bn(qty[p.id] * p.price);
+  });
+  var total = PRODUCTS.reduce(function (s, p) { return s + qty[p.id] * p.price; }, 0);
+  return "আসসালামু আলাইকুম, " + SHOP + "-এ অর্ডার করতে চাই।\n\n" + items.join("\n") +
+    "\n\nমোট: ৳" + bn(total) + (sp ? "\nস্পিড: " + sp : "") +
+    "\n\nনাম: " + (name || "-") + "\nমোবাইল: " + (phone || "-") + "\nঠিকানা: " + (addr || "-");
+}
+
+function copyText(text, btn, done) {
+  var old = btn.textContent;
+  function ok() { btn.textContent = done; setTimeout(function () { btn.textContent = old; }, 1600); }
+  function fallback() {
+    var r = document.createRange();
+    var target = document.getElementById("msg");
+    if (btn.id === "copyPhone") target = document.getElementById("phoneShow");
+    r.selectNodeContents(target);
+    var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+    btn.textContent = "সিলেক্ট হয়েছে, কপি করুন";
+  }
+  try { navigator.clipboard.writeText(text).then(ok, fallback); } catch (err) { fallback(); }
+}
+
+document.getElementById("form").addEventListener("submit", function (e) {
+  e.preventDefault();
+  var msg = document.getElementById("msg");
+  if (render() === 0) {
+    msg.textContent = "আগে উপরে থেকে অন্তত একটা কক বাছাই করুন।";
+    msg.classList.add("show");
+    document.getElementById("after").hidden = true;
+    return;
+  }
+  var text = buildMessage();
+  msg.textContent = text;
+  msg.classList.add("show");
+  document.getElementById("after").hidden = false;
+  document.getElementById("wa").href = "https://wa.me/" + PHONE_INTL + "?text=" + encodeURIComponent(text);
+});
+document.getElementById("copy").addEventListener("click", function () {
+  copyText(document.getElementById("msg").textContent, this, "কপি হয়েছে");
+});
+document.getElementById("copyPhone").addEventListener("click", function () {
+  copyText(PHONE_LOCAL, this, "কপি হয়েছে");
+});
+render();
+</script>
